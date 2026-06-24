@@ -250,12 +250,13 @@ const DEMO_SERIES = [
     company_color:"#7B2FBE", clinical_stage:"Phase 2",
     headline:"Revolution Medicines — Pan-KRAS inhibitor series",
     mechanism:"Switch-II/ON-state · gem-difluorocyclopropyl pharmacophore",
-    scaffold_smiles:"C[C@@H]1CN(c2ncnc3[nH]ccc23)CC[C@@H]1FC1(F)CC1",
+    scaffold_smiles:"C[C@H]1CCN(c2ncnc3[nH]ccc23)C[C@@H]1C1(F)CC1F",
+    highlight_smarts:"[F]C1CC1",
     compounds:[
-      {smiles:"C[C@@H]1CN(c2ncnc3[nH]ccc23)CC[C@@H]1FC1(F)CC1", name:"RMC-6236 analog", patent_id:"WO2024081916", date:"2024", mw:382, clogp:2.4, is_clinical:true},
-      {smiles:"FC1(CC1)c1ccc(F)cc1", name:"Fluorocyclopropyl-F-benzene", patent_id:"US20230134380", date:"2023", mw:194, clogp:3.1, is_clinical:false},
-      {smiles:"FC1CC1c1ccncc1", name:"1-F-cyclopropyl pyridine (SOS1 handle)", patent_id:"WO2023099527", date:"2023", mw:153, clogp:1.9, is_clinical:false},
-      {smiles:"FC1(F)CC1CCN", name:"gem-Difluorocyclopropyl ethylamine", patent_id:"US20240101984", date:"2024", mw:121, clogp:0.8, is_clinical:false},
+      {smiles:"C[C@H]1CCN(c2ncnc3[nH]ccc23)C[C@@H]1C1(F)CC1F", name:"RMC-6236 analog (Pan-KRAS)", patent_id:"WO2024081916", date:"2024", mw:292, clogp:2.9, is_clinical:true},
+      {smiles:"FC1(F)CC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-F2-cyclopropyl nicotinamide", patent_id:"US20230134380", date:"2023", mw:274, clogp:3.5, is_clinical:false},
+      {smiles:"COc1ccc(NC(=O)c2ccc(C3(F)CC3)cc2)cc1", name:"Fluorocyclopropyl benzamide (SOS1)", patent_id:"WO2023099527", date:"2023", mw:285, clogp:3.9, is_clinical:false},
+      {smiles:"FC1(F)CC1c1ccc(-c2nc3ccc(F)cc3[nH]2)cc1", name:"gem-F2-cyclopropyl fluorobenzimidazole", patent_id:"US20240101984", date:"2024", mw:288, clogp:4.5, is_clinical:false},
     ],
     patent_ids:["WO2024081916","US20230134380","WO2023099527"], n_compounds:31,
     first_seen:"2022", last_updated:"2024", is_new_this_week:true,
@@ -267,29 +268,31 @@ const DEMO_SERIES = [
     headline:"Merck — Reversible covalent BTK series (cyanoacrylamide)",
     mechanism:"Reversible covalent · Cys481 · cyanoacrylamide warhead",
     scaffold_smiles:"N#C/C=C/C(=O)Nc1cccc(NC(=O)c2ccc(F)cc2)c1",
+    highlight_smarts:"N#CC=CC(=O)N",
     compounds:[
-      {smiles:"N#C/C=C/C(=O)Nc1cccc(NC(=O)c2ccc(F)cc2)c1", name:"Cyanoacrylamide BTK inhibitor", patent_id:"US20230295121", date:"2023", mw:337, clogp:3.2, is_clinical:true},
-      {smiles:"O=C(NC1CC2CC1C2)c1ccncc1", name:"BCB–pyridine amide (covalent probe)", patent_id:"WO2024013251", date:"2024", mw:202, clogp:1.7, is_clinical:false},
-      {smiles:"NS(=O)(=O)C12CCC1CC2", name:"BCP sulfonamide fragment", patent_id:"US20230399282", date:"2023", mw:175, clogp:0.4, is_clinical:false},
+      {smiles:"N#C/C=C/C(=O)Nc1cccc(NC(=O)c2ccc(F)cc2)c1", name:"Cyanoacrylamide BTK inhibitor", patent_id:"US20230295121", date:"2023", mw:309, clogp:3.1, is_clinical:true},
+      {smiles:"N#C/C=C/C(=O)Nc1ccc(-c2nc3ccc(F)cc3o2)cc1", name:"Cyanoacrylamide fluorobenzoxazole", patent_id:"WO2024013251", date:"2024", mw:307, clogp:3.7, is_clinical:false},
+      {smiles:"N#C/C=C/C(=O)Nc1ccc(N2CCN(c3ccccn3)CC2)cc1", name:"Cyanoacrylamide piperazinyl-pyridine", patent_id:"US20230399282", date:"2023", mw:333, clogp:2.4, is_clinical:false},
     ],
     patent_ids:["US20230295121","WO2024013251"], n_compounds:18,
     first_seen:"2022", last_updated:"2024", is_new_this_week:false,
-    tags:["Cyanoacrylamide warhead","Bicyclo[1.1.0]butane (BCB)"]
+    tags:["Cyanoacrylamide warhead","Reversible covalent"]
   },
   {
     id:"ser_d03", target:"CRBN (cereblon)", company:"BMS",
     company_color:"#BE2026", clinical_stage:"Clinical",
-    headline:"BMS — Non-IMiD cereblon ligand series (IKZF1/3 degraders)",
-    mechanism:"CRBN E3 ligase recruitment · non-glutarimide handle",
-    scaffold_smiles:"O=C1CC(=O)N(c2ccc(F)cc2)C1",
+    headline:"BMS — CELMoD series (IKZF1/3 degraders)",
+    mechanism:"CRBN E3 ligase recruitment · glutarimide handle · targeted protein degradation",
+    scaffold_smiles:"O=C1CC(=O)N(c2ccc(N3CCN(c4ccc5c(c4)C(=O)NCC5)CC3)cc2)C1",
+    highlight_smarts:"O=C1CC(=O)NC1",
     compounds:[
-      {smiles:"O=C1CC(=O)N(c2ccc(F)cc2)C1", name:"Fluorophenyl glutarimide (iberdomide analog)", patent_id:"US20240150354", date:"2024", mw:193, clogp:0.7, is_clinical:true},
-      {smiles:"O=C1CC(=O)N(CC2CCCC2)C1", name:"Cyclopentylmethyl glutarimide (STAT3 degrader)", patent_id:"WO2023150240", date:"2023", mw:195, clogp:1.2, is_clinical:false},
-      {smiles:"O=C1CCC(=O)N1c1ccc(F)cc1", name:"γ-Lactam CRBN handle (CELMoD)", patent_id:"WO2024052856", date:"2024", mw:179, clogp:0.6, is_clinical:false},
+      {smiles:"O=C1CC(=O)N(c2ccc(N3CCN(c4ccc5c(c4)C(=O)NCC5)CC3)cc2)C1", name:"Iberdomide analog (CELMoD)", patent_id:"US20240150354", date:"2024", mw:404, clogp:1.6, is_clinical:true},
+      {smiles:"O=C1CC(=O)N(c2ccc(NC(=O)c3ccc(N4CCOCC4)cc3)cc2)C1", name:"Glutarimide-morpholino CELMoD", patent_id:"WO2023150240", date:"2023", mw:379, clogp:2.1, is_clinical:false},
+      {smiles:"O=C1CC(=O)N(CC2CCCC2)C1", name:"Cyclopentylmethyl glutarimide (linker opt.)", patent_id:"WO2024052856", date:"2024", mw:181, clogp:1.0, is_clinical:false},
     ],
     patent_ids:["US20240150354","WO2023150240","WO2024052856"], n_compounds:24,
     first_seen:"2021", last_updated:"2024", is_new_this_week:false,
-    tags:["Cereblon glutarimide","Fluorinated cyclopropane"]
+    tags:["Cereblon glutarimide","CELMoD"]
   },
   {
     id:"ser_d04", target:"EGFR", company:"AstraZeneca",
@@ -297,9 +300,10 @@ const DEMO_SERIES = [
     headline:"AstraZeneca — SuFEx covalent EGFR exon20 series",
     mechanism:"SuFEx chemistry · sulfonyl fluoride warhead · exon20 insertion",
     scaffold_smiles:"O=S(=O)(F)c1ccc(Nc2ncnc3cccc(OC)c23)cc1",
+    highlight_smarts:"S(=O)(=O)F",
     compounds:[
-      {smiles:"O=S(=O)(F)c1ccc(Nc2ncnc3cccc(OC)c23)cc1", name:"SF-quinazoline EGFR warhead", patent_id:"WO2024079490", date:"2024", mw:317, clogp:3.0, is_clinical:false},
-      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-Difluorocyclobutane CDK scaffold", patent_id:"US20240199606", date:"2024", mw:298, clogp:3.1, is_clinical:false},
+      {smiles:"O=S(=O)(F)c1ccc(Nc2ncnc3cccc(OC)c23)cc1", name:"SF-quinazoline EGFR warhead", patent_id:"WO2024079490", date:"2024", mw:333, clogp:3.0, is_clinical:false},
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-F2-cyclobutane nicotinamide", patent_id:"US20240199606", date:"2024", mw:288, clogp:3.9, is_clinical:false},
     ],
     patent_ids:["WO2024079490"], n_compounds:9,
     first_seen:"2023", last_updated:"2024", is_new_this_week:true,
@@ -311,9 +315,10 @@ const DEMO_SERIES = [
     headline:"Arvinas — VHL-recruiting PROTAC series (STAT3 degraders)",
     mechanism:"Bifunctional degrader · VHL E3 ligase · PEG linker",
     scaffold_smiles:"CC(C)(C)OC(=O)N1CC(O)CC1C(=O)NCCOCCOCCNC(=O)c1ccncc1",
+    highlight_smarts:"OCCOCCO",
     compounds:[
-      {smiles:"CC(C)(C)OC(=O)N1CC(O)CC1C(=O)NCCOCCOCCNC(=O)c1ccncc1", name:"VHL-PEG STAT3 PROTAC (ARV-471 linker)", patent_id:"WO2023081867", date:"2023", mw:512, clogp:0.8, is_clinical:true},
-      {smiles:"O=C1CC(=O)N(CCOCCOCCNC(=O)c2ccncc2)C1", name:"CRBN-PEG BCL-XL PROTAC (C4T linker)", patent_id:"WO2024097985", date:"2024", mw:406, clogp:0.5, is_clinical:false},
+      {smiles:"CC(C)(C)OC(=O)N1CC(O)CC1C(=O)NCCOCCOCCNC(=O)c1ccncc1", name:"VHL-PEG STAT3 PROTAC (ARV-471 linker)", patent_id:"WO2023081867", date:"2023", mw:466, clogp:0.3, is_clinical:true},
+      {smiles:"O=C1CC(=O)N(CCOCCOCCNC(=O)c2ccncc2)C1", name:"CRBN-PEG linker PROTAC (C4T)", patent_id:"WO2024097985", date:"2024", mw:335, clogp:-0.4, is_clinical:false},
     ],
     patent_ids:["WO2023081867","WO2024097985"], n_compounds:14,
     first_seen:"2022", last_updated:"2024", is_new_this_week:false,
@@ -325,27 +330,30 @@ const DEMO_SERIES = [
     headline:"AbbVie — gem-Difluorocyclobutane BCL-2 series",
     mechanism:"BH3 mimetic · gem-difluorocyclobutyl sp3 enrichment",
     scaffold_smiles:"FC1(F)CCC1CN1CCN(c2ccc(Cl)cc2)CC1",
+    highlight_smarts:"FC1(F)CCC1",
     compounds:[
-      {smiles:"FC1(F)CCC1CN1CCN(c2ccc(Cl)cc2)CC1", name:"gem-F2-cyclobutyl piperazine (venetoclax analog)", patent_id:"US20230312570", date:"2023", mw:329, clogp:3.7, is_clinical:true},
-      {smiles:"FC1(F)CC1CCN", name:"gem-Difluorocyclopropyl ethylamine", patent_id:"US20240101984", date:"2024", mw:121, clogp:0.8, is_clinical:false},
+      {smiles:"FC1(F)CCC1CN1CCN(c2ccc(Cl)cc2)CC1", name:"gem-F2-cyclobutyl chloro-piperazine", patent_id:"US20230312570", date:"2023", mw:300, clogp:3.5, is_clinical:true},
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccc(Cl)cc2)cc1", name:"gem-F2-cyclobutyl chlorobenzamide", patent_id:"US20240101984", date:"2024", mw:321, clogp:5.1, is_clinical:false},
     ],
     patent_ids:["US20230312570"], n_compounds:16,
     first_seen:"2021", last_updated:"2024", is_new_this_week:false,
-    tags:["gem-Difluorocyclobutane","Piperazine"]
+    tags:["gem-Difluorocyclobutane","BH3 mimetic"]
   },
   {
     id:"ser_d07", target:"IRAK4", company:"GSK",
     company_color:"#F36633", clinical_stage:"Clinical",
     headline:"GSK — Oxetane-enriched IRAK4 inhibitor series",
     mechanism:"ATP-competitive kinase inhibition · oxetane bioisostere",
-    scaffold_smiles:"C1OCC1c1ccncc1",
+    scaffold_smiles:"O=C(Nc1ccc(C2COC2)cc1)c1ccc(N2CCOCC2)nc1",
+    highlight_smarts:"C1COC1",
     compounds:[
-      {smiles:"C1OCC1c1ccncc1", name:"3-Pyridinyl oxetane (IRAK4 scaffold fragment)", patent_id:"WO2023148474", date:"2023", mw:149, clogp:0.6, is_clinical:false},
-      {smiles:"C1CNC1c1ccc(F)cc1F", name:"3-(2,4-Difluorophenyl)azetidine (TYK2 scaffold)", patent_id:"WO2024042053", date:"2024", mw:169, clogp:1.7, is_clinical:true},
+      {smiles:"O=C(Nc1ccc(C2COC2)cc1)c1ccc(N2CCOCC2)nc1", name:"Oxetane-morpholine IRAK4 inhibitor", patent_id:"WO2023148474", date:"2023", mw:339, clogp:2.3, is_clinical:true},
+      {smiles:"C1OCC1c1ccc(-c2nc3ccc(F)cc3[nH]2)cc1", name:"Oxetane-fluorobenzimidazole IRAK4", patent_id:"WO2024042053", date:"2024", mw:268, clogp:3.5, is_clinical:false},
+      {smiles:"FC(F)(F)c1ccc(NC(=O)c2ccc(C3COC3)cc2)cc1", name:"Oxetane-trifluoromethyl IRAK4", patent_id:"WO2023148474", date:"2023", mw:321, clogp:4.1, is_clinical:false},
     ],
     patent_ids:["WO2023148474","WO2024042053"], n_compounds:11,
     first_seen:"2022", last_updated:"2024", is_new_this_week:false,
-    tags:["Oxetane","Azetidine"]
+    tags:["Oxetane","IRAK4 inhibitor"]
   },
   {
     id:"ser_d08", target:"CDK4/6", company:"Eli Lilly",
@@ -353,8 +361,10 @@ const DEMO_SERIES = [
     headline:"Eli Lilly — gem-Difluorocyclobutane CDK4/6 series",
     mechanism:"ATP-competitive · sp3-enriched alicyclic core",
     scaffold_smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1",
+    highlight_smarts:"FC1(F)CCC1",
     compounds:[
-      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-F2-cyclobutane CDK4/6 inhibitor", patent_id:"US20240199606", date:"2024", mw:298, clogp:3.1, is_clinical:true},
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-F2-cyclobutane CDK4/6 inhibitor", patent_id:"US20240199606", date:"2024", mw:288, clogp:3.9, is_clinical:true},
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccc(N3CCCC3=O)cc2)cc1", name:"gem-F2-cyclobutyl pyrrolidinone CDK", patent_id:"US20240199606", date:"2024", mw:370, clogp:4.6, is_clinical:false},
     ],
     patent_ids:["US20240199606"], n_compounds:8,
     first_seen:"2023", last_updated:"2024", is_new_this_week:true,
@@ -484,7 +494,7 @@ function render() {
     const structs = show.map(c => {
       const clinCls = c.is_clinical ? ' is-clinical' : '';
       const label = c.name ? `<div class="mol-name">${c.name}</div>` : '';
-      return `<div class="mol-cell${clinCls}" style="height:110px" data-smi="${c.smiles}" data-w="130" data-h="100">${label}</div>`;
+      return `<div class="mol-cell${clinCls}" style="height:110px" data-smi="${c.smiles}" data-w="130" data-h="100" data-highlight="${c.highlight_smarts||s.highlight_smarts||''}" data-color="${s.company_color}">${label}</div>`;
     }).join('');
 
     const moreEl = extra > 0 ? `<div class="mol-more">+${extra}</div>` : '';
@@ -548,7 +558,7 @@ function openDetail(id) {
   const cpds = s.compounds || [];
   document.getElementById('dpCpdGrid').innerHTML = cpds.map(c => `
     <div class="cpd-cell${c.is_clinical ? ' is-clinical' : ''}">
-      <div class="cpd-mol" style="height:140px" data-smi="${c.smiles}" data-w="140" data-h="130"></div>
+      <div class="cpd-mol" style="height:140px" data-smi="${c.smiles}" data-w="140" data-h="130" data-highlight="${c.highlight_smarts||s.highlight_smarts||''}" data-color="${s.company_color}"></div>
       <div class="cpd-info">
         <div class="cpd-name">${c.name || c.smiles.slice(0,20)+'…'}</div>
         <div class="cpd-props">
@@ -588,37 +598,63 @@ function closeDetail() {
 // ═══════════════════════════════════════════════════════════════════
 // RDKIT STRUCTURE RENDERING
 // ═══════════════════════════════════════════════════════════════════
+function hexToRgb(hex) {
+  const h = hex.replace('#','');
+  return [parseInt(h.slice(0,2),16)/255, parseInt(h.slice(2,4),16)/255, parseInt(h.slice(4,6),16)/255];
+}
+
 function renderMols() {
   document.querySelectorAll('[data-smi]:not(.rendered)').forEach(el => {
-    const smi = el.dataset.smi;
-    const w   = parseInt(el.dataset.w) || 130;
-    const h   = parseInt(el.dataset.h) || 110;
+    const smi       = el.dataset.smi;
+    const w         = parseInt(el.dataset.w) || 130;
+    const h         = parseInt(el.dataset.h) || 110;
+    const highlight = el.dataset.highlight || '';
+    const color     = el.dataset.color || '';
     try {
       const mol = RDK.get_mol(smi);
-      if (mol && mol.is_valid()) {
-        // Build SVG with clean white background
-        const details = JSON.stringify({
-          width: w, height: h,
-          bondLineWidth: 1.5,
-          padding: 0.1,
-          backgroundColour: [1,1,1,0],
-          highlightColour: [0.1,0.3,0.86,1],
-        });
-        const svg = mol.get_svg_with_highlights(details);
-        // Prepend the label if it exists
-        const label = el.querySelector('.mol-name');
-        el.innerHTML = svg + (label ? label.outerHTML : '');
-        mol.delete();
-        el.classList.add('rendered');
+      if (!mol || !mol.is_valid()) { mol && mol.delete(); return; }
+
+      let atomColors = {}, bondColors = {}, radii = {};
+
+      if (highlight && color) {
+        try {
+          const qmol = RDK.get_qmol(highlight);
+          if (qmol) {
+            const matchJson = mol.get_substruct_matches(qmol);
+            const matches = JSON.parse(matchJson);
+            const rgb = hexToRgb(color);
+            matches.forEach(m => {
+              const atoms = m.atoms || m;
+              const bonds = m.bonds || [];
+              (Array.isArray(atoms) ? atoms : Object.values(atoms)).forEach(i => {
+                atomColors[i] = [...rgb, 0.75];
+                radii[i] = 0.45;
+              });
+              bonds.forEach(i => { bondColors[i] = [...rgb, 0.75]; });
+            });
+            qmol.delete();
+          }
+        } catch(he) { /* highlight failed — render plain */ }
       }
+
+      const details = JSON.stringify({
+        width: w, height: h,
+        bondLineWidth: 1.5,
+        padding: 0.1,
+        backgroundColour: [1,1,1,0],
+        highlightAtomColors: atomColors,
+        highlightBondColors: bondColors,
+        highlightAtomRadii:  radii,
+      });
+      const svg = mol.get_svg_with_highlights(details);
+      const label = el.querySelector('.mol-name');
+      el.innerHTML = svg + (label ? label.outerHTML : '');
+      mol.delete();
+      el.classList.add('rendered');
     } catch(e) {
       try {
         const mol = RDK.get_mol(smi);
-        if (mol) {
-          el.innerHTML = mol.get_svg(w, h);
-          mol.delete();
-          el.classList.add('rendered');
-        }
+        if (mol) { el.innerHTML = mol.get_svg(w, h); mol.delete(); el.classList.add('rendered'); }
       } catch(e2) {}
     }
   });
