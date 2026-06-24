@@ -1,0 +1,1244 @@
+{
+  "generated_at": "2026-06-23T12:21:00.950647+00:00",
+  "meta": {
+    "n_compounds": 48,
+    "n_fragments": 62,
+    "n_pharma_sigs": 0,
+    "window_years": [
+      1940,
+      2022
+    ],
+    "supplier_data": "placeholder",
+    "min_support": 3,
+    "source": "seed"
+  },
+  "trends": [
+    {
+      "id": "t1",
+      "headline": "BCP bioisostere — Accelerating",
+      "bb_class": "BCP bioisostere",
+      "score": 76.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: BCP bioisostere first detected in the most recent data window (5 supporting structures).",
+      "detail": "BCP bioisostere is a new entrant — first appeared in the latest data window. 5 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. Key assignees: Pfizer, AstraZeneca. ",
+      "action": "Early signal: build awareness of BCP bioisostere — evaluate for your programs.",
+      "evidence": 5,
+      "sources": [
+        "paper",
+        "patent"
+      ],
+      "targets": [],
+      "assignees": [
+        "Pfizer",
+        "AstraZeneca"
+      ],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#E8364E",
+      "smiles": [
+        "O=C(O)C12CCC1C2",
+        "NCC12CCC1C2",
+        "OB(O)C12CCC1C2"
+      ],
+      "primary_smiles": "O=C(O)C12CCC1C2"
+    },
+    {
+      "id": "t2",
+      "headline": "Boronic acid warhead — Accelerating",
+      "bb_class": "Boronic acid warhead",
+      "score": 64.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: Boronic acid warhead first detected in the most recent data window (4 supporting structures).",
+      "detail": "Boronic acid warhead is a new entrant — first appeared in the latest data window. 4 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. ",
+      "action": "Early signal: build awareness of Boronic acid warhead — evaluate for your programs.",
+      "evidence": 4,
+      "sources": [
+        "paper",
+        "patent"
+      ],
+      "targets": [],
+      "assignees": [],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#0EA573",
+      "smiles": [
+        "OB(O)C12CCC1C2",
+        "OB(O)c1ccc(F)cc1",
+        "OB(O)c1ccncc1"
+      ],
+      "primary_smiles": "OB(O)C12CCC1C2"
+    },
+    {
+      "id": "t3",
+      "headline": "Sulfonyl fluoride (SuFEx) — Accelerating",
+      "bb_class": "Sulfonyl fluoride (SuFEx)",
+      "score": 64.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: Sulfonyl fluoride (SuFEx) first detected in the most recent data window (4 supporting structures).",
+      "detail": "Sulfonyl fluoride (SuFEx) is a new entrant — first appeared in the latest data window. 4 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. Key assignees: Merck. ",
+      "action": "Early signal: build awareness of Sulfonyl fluoride (SuFEx) — evaluate for your programs.",
+      "evidence": 4,
+      "sources": [
+        "paper",
+        "patent"
+      ],
+      "targets": [
+        "KRAS G12C",
+        "EGFR C797S",
+        "BTK"
+      ],
+      "assignees": [
+        "Merck"
+      ],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#E67E22",
+      "smiles": [
+        "Nc1ccc(S(=O)(=O)F)cc1",
+        "O=S(=O)(F)c1ccncc1",
+        "O=S(=O)(F)c1ccc(O)cc1"
+      ],
+      "primary_smiles": "Nc1ccc(S(=O)(=O)F)cc1"
+    },
+    {
+      "id": "t4",
+      "headline": "Spirocyclic scaffold — Accelerating",
+      "bb_class": "Spirocyclic scaffold",
+      "score": 64.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: Spirocyclic scaffold first detected in the most recent data window (4 supporting structures).",
+      "detail": "Spirocyclic scaffold is a new entrant — first appeared in the latest data window. 4 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. Key assignees: Enamine. ",
+      "action": "Early signal: build awareness of Spirocyclic scaffold — evaluate for your programs.",
+      "evidence": 4,
+      "sources": [
+        "paper",
+        "patent"
+      ],
+      "targets": [
+        "Ion channel",
+        "GPCR"
+      ],
+      "assignees": [
+        "Enamine"
+      ],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#6C5CE7",
+      "smiles": [
+        "O=C(O)C1CCC2(CCC2)CC1",
+        "NC1CCC2(CC1)COC2",
+        "O=C(O)C1CC2(CCC2)C1"
+      ],
+      "primary_smiles": "O=C(O)C1CCC2(CCC2)CC1"
+    },
+    {
+      "id": "t5",
+      "headline": "PROTAC linker — Accelerating",
+      "bb_class": "PROTAC linker",
+      "score": 52.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: PROTAC linker first detected in the most recent data window (3 supporting structures).",
+      "detail": "PROTAC linker is a new entrant — first appeared in the latest data window. 3 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. Key assignees: Arvinas, Kymera. ",
+      "action": "Early signal: build awareness of PROTAC linker — evaluate for your programs.",
+      "evidence": 3,
+      "sources": [
+        "patent"
+      ],
+      "targets": [
+        "CRBN",
+        "BRD4",
+        "AR"
+      ],
+      "assignees": [
+        "Arvinas",
+        "Kymera"
+      ],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#0891B2",
+      "smiles": [
+        "O=C(O)Cn1cc(C(=O)O)nn1",
+        "NCCOCCOCCO",
+        "O=C(O)CCOCCOCCO"
+      ],
+      "primary_smiles": "O=C(O)Cn1cc(C(=O)O)nn1"
+    },
+    {
+      "id": "t6",
+      "headline": "Deuterium label — Accelerating",
+      "bb_class": "Deuterium label",
+      "score": 52.0,
+      "badge": "emerging",
+      "trajectory": "accelerating",
+      "one_liner": "New entrant: Deuterium label first detected in the most recent data window (3 supporting structures).",
+      "detail": "Deuterium label is a new entrant — first appeared in the latest data window. 3 structures so far. ⚡ Whitespace: patent/literature signal with no approved drugs yet — predictive. Key assignees: Concert Pharma, BMS. ",
+      "action": "Early signal: build awareness of Deuterium label — evaluate for your programs.",
+      "evidence": 3,
+      "sources": [
+        "paper",
+        "patent"
+      ],
+      "targets": [
+        "JAK",
+        "TYK2"
+      ],
+      "assignees": [
+        "Concert Pharma",
+        "BMS"
+      ],
+      "whitespace": true,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#DC6B30",
+      "smiles": [
+        "[2H]c1ccc(C(=O)O)cc1",
+        "[2H]C([2H])([2H])c1ccccc1",
+        "[2H]c1cncc([2H])c1"
+      ],
+      "primary_smiles": "[2H]c1ccc(C(=O)O)cc1"
+    },
+    {
+      "id": "t7",
+      "headline": "Cereblon glutarimide — Accelerating",
+      "bb_class": "Cereblon glutarimide",
+      "score": 17.0,
+      "badge": "rising",
+      "trajectory": "accelerating",
+      "one_liner": "Rising signal: Cereblon glutarimide in 4 structures, velocity positive across approved drugs, literature and patents.",
+      "detail": "Cereblon glutarimide shows upward momentum in approved drugs, literature and patents. 4 structures captured; Key assignees: BMS, Novartis. Associated targets: IKZF3, CRBN, IKZF1.",
+      "action": "Monitor Cereblon glutarimide closely; consider diversifying your Cereblon glutarimide panel.",
+      "evidence": 4,
+      "sources": [
+        "approval",
+        "paper",
+        "patent"
+      ],
+      "targets": [
+        "IKZF3",
+        "CRBN",
+        "IKZF1"
+      ],
+      "assignees": [
+        "BMS",
+        "Novartis"
+      ],
+      "whitespace": false,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#7F8C9B",
+      "smiles": [
+        "O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1",
+        "O=C1CCC(N2C(=O)c3ccc(F)cc3C2=O)C(=O)N1",
+        "O=C1CCC(N2C(=O)c3ccc(Cl)cc3C2=O)C(=O)N1"
+      ],
+      "primary_smiles": "O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1"
+    },
+    {
+      "id": "t8",
+      "headline": "Sulfonamide — Accelerating",
+      "bb_class": "Sulfonamide",
+      "score": 17.0,
+      "badge": "rising",
+      "trajectory": "accelerating",
+      "one_liner": "Rising signal: Sulfonamide in 4 structures, velocity positive across approved drugs and literature.",
+      "detail": "Sulfonamide shows upward momentum in approved drugs and literature. 4 structures captured; Associated targets: Carbonic anhydrase, GSPT1, CAIX.",
+      "action": "Monitor Sulfonamide closely; consider diversifying your Sulfonamide panel.",
+      "evidence": 4,
+      "sources": [
+        "approval",
+        "paper"
+      ],
+      "targets": [
+        "Carbonic anhydrase",
+        "GSPT1",
+        "CAIX"
+      ],
+      "assignees": [],
+      "whitespace": false,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#A29BFE",
+      "smiles": [
+        "NS(=O)(=O)c1ccc(-c2ccccn2)cc1",
+        "Nc1ccc(S(N)(=O)=O)cc1",
+        "NS(=O)(=O)c1ccc(Cl)cc1"
+      ],
+      "primary_smiles": "NS(=O)(=O)c1ccc(-c2ccccn2)cc1"
+    },
+    {
+      "id": "t9",
+      "headline": "Unnatural amino acid — Emerging",
+      "bb_class": "Unnatural amino acid",
+      "score": 0.0,
+      "badge": "steady",
+      "trajectory": "emerging",
+      "one_liner": "Unnatural amino acid holds a steady niche — 6 structures, consistent across approved drugs, clinical candidates and patents.",
+      "detail": "Unnatural amino acid maintains steady presence with 6 structures in approved drugs, clinical candidates and patents. Stable velocity. Key assignees: C4 Therapeutics, Novo Nordisk. ",
+      "action": "Unnatural amino acid is a reliable workhorse — maintain standard inventory.",
+      "evidence": 6,
+      "sources": [
+        "approval",
+        "clinical",
+        "patent"
+      ],
+      "targets": [
+        "GLP-1R",
+        "AR"
+      ],
+      "assignees": [
+        "C4 Therapeutics",
+        "Novo Nordisk"
+      ],
+      "whitespace": false,
+      "suppliers": {
+        "enamine": 0,
+        "molport": 0,
+        "mcule": 0
+      },
+      "sparkline": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "years": [
+        1940,
+        1950,
+        1960,
+        1970,
+        1981,
+        1991,
+        2001,
+        2011
+      ],
+      "color": "#00B894",
+      "smiles": [
+        "O=C(O)CNc1ccc(NCC(=O)O)cc1",
+        "CN[C@@H](Cc1ccc(O)cc1)C(=O)O",
+        "CN[C@@H](CC1CCCCC1)C(=O)O"
+      ],
+      "primary_smiles": "O=C(O)CNc1ccc(NCC(=O)O)cc1"
+    }
+  ],
+  "compounds": [
+    {
+      "smiles": "O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1",
+      "name": "Thalidomide",
+      "trend": "t7",
+      "tsne": [
+        0.348,
+        0.1255
+      ],
+      "mw": 258.23,
+      "logd": 0.09,
+      "hbd": 1,
+      "hba": 4,
+      "tpsa": 83.6,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C1CCC(N2C(=O)c3ccc(F)cc3C2=O)C(=O)N1",
+      "name": "Lenalidomide-F",
+      "trend": "t7",
+      "tsne": [
+        0.3246,
+        0.05
+      ],
+      "mw": 276.22,
+      "logd": 0.23,
+      "hbd": 1,
+      "hba": 4,
+      "tpsa": 83.6,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C1CCC(N2C(=O)c3ccc(Cl)cc3C2=O)C(=O)N1",
+      "name": "CRBN-Cl",
+      "trend": "t7",
+      "tsne": [
+        0.3149,
+        0.0604
+      ],
+      "mw": 292.68,
+      "logd": 0.74,
+      "hbd": 1,
+      "hba": 4,
+      "tpsa": 83.6,
+      "rotb": 1
+    },
+    {
+      "smiles": "Nc1ccc(C2CCC(=O)NC2=O)cc1",
+      "name": "Aminoglutarimide",
+      "trend": "t7",
+      "tsne": [
+        0.4368,
+        0.3407
+      ],
+      "mw": 204.23,
+      "logd": 0.79,
+      "hbd": 2,
+      "hba": 3,
+      "tpsa": 72.2,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C(O)C12CCC1C2",
+      "name": "BCP-acid",
+      "trend": "t1",
+      "tsne": [
+        0.9282,
+        0.6723
+      ],
+      "mw": 112.13,
+      "logd": 0.87,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 37.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "NCC12CCC1C2",
+      "name": "BCP-amine",
+      "trend": "t1",
+      "tsne": [
+        0.803,
+        0.6247
+      ],
+      "mw": 97.16,
+      "logd": 0.75,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 26.0,
+      "rotb": 1
+    },
+    {
+      "smiles": "CC1C2CCC12C(=O)O",
+      "name": "BCP-Me-acid",
+      "trend": "t1",
+      "tsne": [
+        0.8999,
+        0.6887
+      ],
+      "mw": 126.15,
+      "logd": 1.12,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 37.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "FC(F)(F)C12CCC1C2",
+      "name": "BCP-CF3",
+      "trend": "t1",
+      "tsne": [
+        0.7804,
+        0.6057
+      ],
+      "mw": 136.12,
+      "logd": 2.35,
+      "hbd": 0,
+      "hba": 0,
+      "tpsa": 0.0,
+      "rotb": 0
+    },
+    {
+      "smiles": "OB(O)C12CCC1C2",
+      "name": "BCP-boronate",
+      "trend": "t2",
+      "tsne": [
+        0.867,
+        0.6243
+      ],
+      "mw": 111.94,
+      "logd": 0.01,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 40.5,
+      "rotb": 1
+    },
+    {
+      "smiles": "OB(O)c1ccc(F)cc1",
+      "name": "4-Fluorophenylboronic acid",
+      "trend": "t2",
+      "tsne": [
+        0.4309,
+        0.7333
+      ],
+      "mw": 139.92,
+      "logd": -0.49,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 40.5,
+      "rotb": 1
+    },
+    {
+      "smiles": "OB(O)c1ccncc1",
+      "name": "Pyridine-3-boronic acid",
+      "trend": "t2",
+      "tsne": [
+        0.4199,
+        0.8345
+      ],
+      "mw": 122.92,
+      "logd": -1.24,
+      "hbd": 2,
+      "hba": 3,
+      "tpsa": 53.4,
+      "rotb": 1
+    },
+    {
+      "smiles": "OB(O)C1CCCC1",
+      "name": "Cyclopentylboronic acid",
+      "trend": "t2",
+      "tsne": [
+        0.742,
+        0.7158
+      ],
+      "mw": 113.95,
+      "logd": 0.4,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 40.5,
+      "rotb": 1
+    },
+    {
+      "smiles": "Nc1ccc(S(=O)(=O)F)cc1",
+      "name": "4-Aminophenyl-SF",
+      "trend": "t3",
+      "tsne": [
+        0.2275,
+        0.8367
+      ],
+      "mw": 175.18,
+      "logd": 0.93,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 60.2,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=S(=O)(F)c1ccncc1",
+      "name": "Pyridinyl-SF",
+      "trend": "t3",
+      "tsne": [
+        0.2431,
+        0.8676
+      ],
+      "mw": 161.16,
+      "logd": 0.74,
+      "hbd": 0,
+      "hba": 3,
+      "tpsa": 47.0,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=S(=O)(F)c1ccc(O)cc1",
+      "name": "4-Hydroxyphenyl-SF",
+      "trend": "t3",
+      "tsne": [
+        0.3085,
+        0.8736
+      ],
+      "mw": 176.17,
+      "logd": 1.05,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 54.4,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=S(=O)(F)c1cncc2ccccc12",
+      "name": "Quinoline-3-SF",
+      "trend": "t3",
+      "tsne": [
+        0.0723,
+        0.8979
+      ],
+      "mw": 211.22,
+      "logd": 1.89,
+      "hbd": 0,
+      "hba": 3,
+      "tpsa": 47.0,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C(O)Cn1cc(C(=O)O)nn1",
+      "name": "Triazole diacid linker",
+      "trend": "t5",
+      "tsne": [
+        0.6132,
+        0.8658
+      ],
+      "mw": 171.11,
+      "logd": -0.94,
+      "hbd": 2,
+      "hba": 5,
+      "tpsa": 105.3,
+      "rotb": 3
+    },
+    {
+      "smiles": "NCCOCCOCCO",
+      "name": "PEG3-amine",
+      "trend": "t5",
+      "tsne": [
+        0.6676,
+        0.8865
+      ],
+      "mw": 149.19,
+      "logd": -1.03,
+      "hbd": 2,
+      "hba": 4,
+      "tpsa": 64.7,
+      "rotb": 7
+    },
+    {
+      "smiles": "O=C(O)CCOCCOCCO",
+      "name": "PEG3-acid",
+      "trend": "t5",
+      "tsne": [
+        0.7984,
+        0.95
+      ],
+      "mw": 178.18,
+      "logd": -0.51,
+      "hbd": 2,
+      "hba": 4,
+      "tpsa": 76.0,
+      "rotb": 8
+    },
+    {
+      "smiles": "O=C(O)CNc1ccc(NCC(=O)O)cc1",
+      "name": "Diamine-diacid linker",
+      "trend": "t9",
+      "tsne": [
+        0.5771,
+        0.8742
+      ],
+      "mw": 224.22,
+      "logd": 0.68,
+      "hbd": 4,
+      "hba": 4,
+      "tpsa": 98.7,
+      "rotb": 6
+    },
+    {
+      "smiles": "CN[C@@H](Cc1ccc(O)cc1)C(=O)O",
+      "name": "N-Me-Tyr",
+      "trend": "t9",
+      "tsne": [
+        0.6223,
+        0.9051
+      ],
+      "mw": 195.22,
+      "logd": 0.61,
+      "hbd": 3,
+      "hba": 3,
+      "tpsa": 69.6,
+      "rotb": 4
+    },
+    {
+      "smiles": "CN[C@@H](CC1CCCCC1)C(=O)O",
+      "name": "N-Me-cyclohexylalanine",
+      "trend": "t9",
+      "tsne": [
+        0.9096,
+        0.8096
+      ],
+      "mw": 185.27,
+      "logd": 1.63,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 49.3,
+      "rotb": 4
+    },
+    {
+      "smiles": "O=C(O)[C@@H]1CCCN1",
+      "name": "L-Proline",
+      "trend": "t9",
+      "tsne": [
+        0.8732,
+        0.6858
+      ],
+      "mw": 115.13,
+      "logd": -0.18,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 49.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "C[C@H](N)C(=O)O",
+      "name": "Alanine",
+      "trend": "t9",
+      "tsne": [
+        0.725,
+        0.8891
+      ],
+      "mw": 89.09,
+      "logd": -0.58,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 63.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "N[C@@H](Cc1c[nH]cn1)C(=O)O",
+      "name": "L-Histidine",
+      "trend": "t9",
+      "tsne": [
+        0.5889,
+        0.9467
+      ],
+      "mw": 155.16,
+      "logd": -0.64,
+      "hbd": 3,
+      "hba": 3,
+      "tpsa": 92.0,
+      "rotb": 3
+    },
+    {
+      "smiles": "NS(=O)(=O)c1ccc(-c2ccccn2)cc1",
+      "name": "Pyridyl-sulfonamide",
+      "trend": "t8",
+      "tsne": [
+        0.05,
+        0.8503
+      ],
+      "mw": 234.28,
+      "logd": 1.4,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 73.1,
+      "rotb": 2
+    },
+    {
+      "smiles": "Nc1ccc(S(N)(=O)=O)cc1",
+      "name": "4-Aminobenzenesulfonamide",
+      "trend": "t8",
+      "tsne": [
+        0.2332,
+        0.8291
+      ],
+      "mw": 172.21,
+      "logd": -0.08,
+      "hbd": 2,
+      "hba": 3,
+      "tpsa": 86.2,
+      "rotb": 1
+    },
+    {
+      "smiles": "NS(=O)(=O)c1ccc(Cl)cc1",
+      "name": "4-Chlorobenzenesulfonamide",
+      "trend": "t8",
+      "tsne": [
+        0.2395,
+        0.8017
+      ],
+      "mw": 191.64,
+      "logd": 0.99,
+      "hbd": 1,
+      "hba": 2,
+      "tpsa": 60.2,
+      "rotb": 1
+    },
+    {
+      "smiles": "NS(=O)(=O)c1cncc2ccccc12",
+      "name": "Quinoline-3-sulfonamide",
+      "trend": "t8",
+      "tsne": [
+        0.0576,
+        0.9018
+      ],
+      "mw": 208.24,
+      "logd": 0.88,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 73.1,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C(O)C1CCC2(CCC2)CC1",
+      "name": "Spiro[3.3]heptane acid",
+      "trend": "t4",
+      "tsne": [
+        0.95,
+        0.6743
+      ],
+      "mw": 168.24,
+      "logd": 2.43,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 37.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "NC1CCC2(CC1)COC2",
+      "name": "Spiro-oxa-amine",
+      "trend": "t4",
+      "tsne": [
+        0.7376,
+        0.5707
+      ],
+      "mw": 141.21,
+      "logd": 0.9,
+      "hbd": 1,
+      "hba": 2,
+      "tpsa": 35.2,
+      "rotb": 0
+    },
+    {
+      "smiles": "O=C(O)C1CC2(CCC2)C1",
+      "name": "Spiro[3.4]octane acid",
+      "trend": "t4",
+      "tsne": [
+        0.9234,
+        0.7052
+      ],
+      "mw": 140.18,
+      "logd": 1.65,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 37.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "C1CC2(CCN1)CC2",
+      "name": "2-Azaspiro[3.3]heptane",
+      "trend": "t4",
+      "tsne": [
+        0.7031,
+        0.6629
+      ],
+      "mw": 111.19,
+      "logd": 1.15,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 12.0,
+      "rotb": 0
+    },
+    {
+      "smiles": "[2H]c1ccc(C(=O)O)cc1",
+      "name": "Benzoic-d4 acid",
+      "trend": "t6",
+      "tsne": [
+        0.492,
+        0.8211
+      ],
+      "mw": 123.13,
+      "logd": 1.38,
+      "hbd": 1,
+      "hba": 1,
+      "tpsa": 37.3,
+      "rotb": 1
+    },
+    {
+      "smiles": "[2H]C([2H])([2H])c1ccccc1",
+      "name": "Toluene-d3",
+      "trend": "t6",
+      "tsne": [
+        0.3981,
+        0.8042
+      ],
+      "mw": 95.16,
+      "logd": 2.0,
+      "hbd": 0,
+      "hba": 0,
+      "tpsa": 0.0,
+      "rotb": 1
+    },
+    {
+      "smiles": "[2H]c1cncc([2H])c1",
+      "name": "Pyridine-d2",
+      "trend": "t6",
+      "tsne": [
+        0.4275,
+        0.8076
+      ],
+      "mw": 81.11,
+      "logd": 1.08,
+      "hbd": 0,
+      "hba": 1,
+      "tpsa": 12.9,
+      "rotb": 0
+    },
+    {
+      "smiles": "O=C1CCC(=O)N(c2cccc(F)c2)C1",
+      "name": "Fluoroglutarimide",
+      "trend": "t1",
+      "tsne": [
+        0.3056,
+        0.4996
+      ],
+      "mw": 207.2,
+      "logd": 1.52,
+      "hbd": 0,
+      "hba": 2,
+      "tpsa": 37.4,
+      "rotb": 1
+    },
+    {
+      "smiles": "CN1C(=O)CCC(=O)N1c1ccc(CN2C(=O)c3ccccc3C2=O)cc1",
+      "name": "CC-122 analogue",
+      "trend": "t1",
+      "tsne": [
+        0.283,
+        0.5131
+      ],
+      "mw": 363.37,
+      "logd": 1.98,
+      "hbd": 0,
+      "hba": 4,
+      "tpsa": 78.0,
+      "rotb": 3
+    },
+    {
+      "smiles": "O=C1CC(=O)N(c2ccc(OCC3CCNCC3)cc2)C1",
+      "name": "Avadomide core",
+      "trend": "t1",
+      "tsne": [
+        0.5399,
+        0.4639
+      ],
+      "mw": 288.35,
+      "logd": 1.37,
+      "hbd": 1,
+      "hba": 4,
+      "tpsa": 58.6,
+      "rotb": 4
+    },
+    {
+      "smiles": "O=C(O)CCCCCC(=O)O",
+      "name": "Suberic acid",
+      "trend": "t1",
+      "tsne": [
+        0.7784,
+        0.9016
+      ],
+      "mw": 160.17,
+      "logd": 1.11,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 74.6,
+      "rotb": 6
+    },
+    {
+      "smiles": "O=C(O)CCCCC(=O)O",
+      "name": "Adipic acid",
+      "trend": "t1",
+      "tsne": [
+        0.7759,
+        0.8995
+      ],
+      "mw": 146.14,
+      "logd": 0.72,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 74.6,
+      "rotb": 5
+    },
+    {
+      "smiles": "N[C@@H](CC(=O)O)c1ccccc1",
+      "name": "β-Phenylalanine",
+      "trend": "t1",
+      "tsne": [
+        0.4868,
+        0.8956
+      ],
+      "mw": 165.19,
+      "logd": 1.16,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 63.3,
+      "rotb": 3
+    },
+    {
+      "smiles": "Nc1nc2ccccc2s1",
+      "name": "2-Aminobenzothiazole",
+      "trend": "t1",
+      "tsne": [
+        0.1545,
+        0.8061
+      ],
+      "mw": 150.21,
+      "logd": 1.88,
+      "hbd": 1,
+      "hba": 3,
+      "tpsa": 38.9,
+      "rotb": 0
+    },
+    {
+      "smiles": "Nc1nc2ccccc2c(=O)[nH]1",
+      "name": "2-Aminoquinazolinone",
+      "trend": "t1",
+      "tsne": [
+        0.188,
+        0.7786
+      ],
+      "mw": 161.16,
+      "logd": 0.51,
+      "hbd": 2,
+      "hba": 3,
+      "tpsa": 71.8,
+      "rotb": 0
+    },
+    {
+      "smiles": "c1ccc(-n2cccn2)cc1",
+      "name": "Phenyl-triazole",
+      "trend": "t1",
+      "tsne": [
+        0.2964,
+        0.7509
+      ],
+      "mw": 144.18,
+      "logd": 1.87,
+      "hbd": 0,
+      "hba": 2,
+      "tpsa": 17.8,
+      "rotb": 1
+    },
+    {
+      "smiles": "O=C(O)C1(O)CC2CCC1C2",
+      "name": "Spiro-OH-acid",
+      "trend": "t1",
+      "tsne": [
+        0.9162,
+        0.6458
+      ],
+      "mw": 156.18,
+      "logd": 0.62,
+      "hbd": 2,
+      "hba": 2,
+      "tpsa": 57.5,
+      "rotb": 1
+    },
+    {
+      "smiles": "Cc1nc(N)ccc1-c1ccccc1",
+      "name": "2-Amino-4-methyl-6-phenylpyrimidine",
+      "trend": "t1",
+      "tsne": [
+        0.22,
+        0.8351
+      ],
+      "mw": 184.24,
+      "logd": 2.64,
+      "hbd": 1,
+      "hba": 2,
+      "tpsa": 38.9,
+      "rotb": 1
+    },
+    {
+      "smiles": "Nc1nc(-c2ccccn2)cs1",
+      "name": "2-Amino-4-(pyridin-2-yl)thiazole",
+      "trend": "t1",
+      "tsne": [
+        0.1184,
+        0.8398
+      ],
+      "mw": 177.23,
+      "logd": 1.79,
+      "hbd": 1,
+      "hba": 4,
+      "tpsa": 51.8,
+      "rotb": 1
+    }
+  ],
+  "pharma_signals": []
+}

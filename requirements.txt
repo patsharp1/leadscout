@@ -1,0 +1,3 @@
+rdkit>=2023.3.1
+anthropic>=0.40.0      # optional: LLM editorial (set ANTHROPIC_API_KEY)
+requests>=2.31.0       # optional: cleaner HTTP client (adapters use urllib by default)

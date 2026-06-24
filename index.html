@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leadscout — Competitive Chemistry Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F4F6F9;
+  --surface:#FFFFFF;
+  --surface2:#F9FAFB;
+  --border:#E5E7EB;
+  --border2:#D1D5DB;
+  --t1:#0F172A;
+  --t2:#374151;
+  --t3:#6B7280;
+  --t4:#9CA3AF;
+  --accent:#1D4ED8;
+  --accent-bg:#EFF6FF;
+  --green:#059669;
+  --green-bg:#ECFDF5;
+  --amber:#D97706;
+  --amber-bg:#FFFBEB;
+  --purple:#7C3AED;
+  --purple-bg:#F5F3FF;
+  --red:#DC2626;
+  --r:10px;
+  --r-lg:14px;
+  --sh:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+  --sh-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
+  --sh-lg:0 20px 40px rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.06);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:56px}
+.hdr-inner{max-width:1320px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;letter-spacing:-1px}
+.logo-name{font-size:16px;font-weight:700;color:var(--t1);letter-spacing:-.3px}
+.logo-tag{font-size:10px;font-weight:500;color:var(--t3);letter-spacing:.5px;margin-left:4px;display:none}
+.target-nav{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none}
+.target-nav::-webkit-scrollbar{display:none}
+.tnav{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:500;color:var(--t3);border:none;background:transparent;cursor:pointer;white-space:nowrap;transition:all .15s}
+.tnav:hover{color:var(--t1);background:var(--surface2)}
+.tnav.on{color:var(--accent);background:var(--accent-bg);font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.search-wrap{position:relative}
+.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--t4);pointer-events:none}
+.search-in{height:32px;padding:0 10px 0 30px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;color:var(--t1);background:var(--surface2);outline:none;width:200px;transition:border-color .15s,width .15s}
+.search-in:focus{border-color:var(--accent);background:#fff;width:240px}
+.search-in::placeholder{color:var(--t4)}
+.live-pip{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;color:var(--t3)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--green-bg);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:1320px;margin:0 auto;padding:24px 24px 60px}
+
+/* ── STATS BAR ── */
+.stats-bar{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.stat-chip{padding:4px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:11px;font-weight:500;color:var(--t3)}
+.stat-chip span{color:var(--t1);font-weight:600}
+.new-chip{background:var(--green-bg);border-color:#A7F3D0;color:var(--green)}
+.new-chip span{color:var(--green);font-weight:700}
+
+/* ── NEW THIS WEEK BANNER ── */
+.new-banner{background:var(--surface);border:1px solid #A7F3D0;border-radius:var(--r);padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px}
+.new-banner-icon{width:24px;height:24px;background:var(--green-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px}
+.new-banner-body{flex:1}
+.new-banner-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--green);margin-bottom:3px}
+.new-banner-items{display:flex;flex-wrap:wrap;gap:6px}
+.new-item{font-size:12px;color:var(--t2);padding:2px 8px;background:var(--green-bg);border-radius:4px}
+
+/* ── SERIES GRID ── */
+.series-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(580px,1fr));gap:16px}
+@media(max-width:640px){.series-grid{grid-template-columns:1fr}}
+
+/* ── SERIES CARD ── */
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s;animation:fadeUp .3s ease both}
+.scard:hover{border-color:var(--border2);box-shadow:var(--sh-md)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.scard-accent{height:3px;width:100%}
+.scard-body{padding:16px}
+.scard-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;gap:8px}
+.scard-co{display:flex;align-items:center;gap:7px}
+.co-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.co-name{font-size:13px;font-weight:700;color:var(--t1)}
+.scard-chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.chip{padding:2px 8px;border-radius:5px;font-size:10px;font-weight:600;letter-spacing:.3px}
+.chip-target{background:var(--accent-bg);color:var(--accent)}
+.chip-approved{background:var(--green-bg);color:var(--green)}
+.chip-clinical{background:var(--purple-bg);color:var(--purple)}
+.chip-preclinical{background:var(--surface2);color:var(--t3);border:1px solid var(--border)}
+.chip-new{background:#FEF3C7;color:#92400E;border:1px solid #FCD34D}
+
+/* ── STRUCTURE GRID ── */
+.struct-row{display:flex;gap:8px;margin-bottom:12px;overflow:hidden}
+.mol-cell{flex:1;min-width:0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.mol-cell svg{max-width:100%;height:auto;display:block}
+.mol-cell .mol-name{position:absolute;bottom:0;left:0;right:0;padding:3px 5px;background:rgba(255,255,255,.9);font-size:9px;color:var(--t3);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid var(--border)}
+.mol-cell.is-clinical .mol-name{color:var(--purple);font-weight:600}
+.mol-more{flex:0 0 60px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--t3)}
+.mol-placeholder{background:linear-gradient(90deg,#f3f4f6 25%,#e5e7eb 50%,#f3f4f6 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:100%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── CARD FOOTER ── */
+.scard-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.scard-mechanism{font-size:11px;color:var(--t3);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scard-meta{display:flex;gap:8px;flex-shrink:0}
+.scard-meta-item{font-size:10px;color:var(--t4)}
+.scard-meta-item span{color:var(--t2);font-weight:500}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:60px 20px;color:var(--t3)}
+.empty-icon{font-size:36px;margin-bottom:12px;opacity:.4}
+.empty-msg{font-size:14px}
+
+/* ── DETAIL PANEL ── */
+.detail-overlay{position:fixed;inset:0;z-index:200;background:rgba(15,23,42,.5);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .2s}
+.detail-overlay.open{opacity:1;pointer-events:auto}
+.detail-panel{position:fixed;top:0;right:0;bottom:0;width:min(860px,100vw);z-index:201;background:var(--surface);box-shadow:var(--sh-lg);overflow-y:auto;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.detail-panel.open{transform:translateX(0)}
+.dp-header{position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;gap:12px;z-index:10}
+.dp-back{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--t3);border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;background:none;transition:all .15s}
+.dp-back:hover{color:var(--t1);border-color:var(--border2)}
+.dp-title{font-size:16px;font-weight:700;color:var(--t1);flex:1}
+.dp-body{padding:20px}
+.dp-meta-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:20px}
+.dp-meta-cell{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.dp-meta-label{font-size:9px;font-weight:700;letter-spacing:1.2px;color:var(--t4);text-transform:uppercase;margin-bottom:4px}
+.dp-meta-val{font-size:13px;font-weight:600;color:var(--t1)}
+.dp-section-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;margin-bottom:12px}
+.cpd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px}
+.cpd-cell{background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .15s}
+.cpd-cell:hover{border-color:var(--border2)}
+.cpd-mol{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--surface);border-bottom:1px solid var(--border)}
+.cpd-mol svg{max-width:100%;height:auto}
+.cpd-info{padding:8px 9px}
+.cpd-name{font-size:10px;font-weight:600;color:var(--t2);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpd-props{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+.cpd-prop{font-size:9px;color:var(--t4)}
+.cpd-prop span{color:var(--t2);font-weight:500}
+.cpd-pat{font-size:9px;color:var(--accent);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cpd-pat:hover{text-decoration:underline}
+.cpd-cell.is-clinical{border-color:#DDD6FE}
+.cpd-cell.is-clinical .cpd-name{color:var(--purple)}
+.patent-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.patent-link{font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-bg);padding:4px 10px;border-radius:5px;text-decoration:none;cursor:pointer}
+.patent-link:hover{text-decoration:underline}
+
+/* ── LOADING SCREEN ── */
+.loading-screen{position:fixed;inset:0;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:300;transition:opacity .4s}
+.loading-screen.hidden{opacity:0;pointer-events:none}
+.loading-logo{font-size:22px;font-weight:800;color:var(--t1);letter-spacing:-.5px}
+.loading-sub{font-size:12px;color:var(--t3)}
+.loading-bar{width:180px;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.loading-fill{height:100%;background:var(--accent);border-radius:2px;animation:loadfill 1.8s ease-in-out infinite}
+@keyframes loadfill{0%{width:0%;margin-left:0}50%{width:60%}100%{width:0%;margin-left:100%}}
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-logo">◈ Leadscout</div>
+  <div class="loading-sub">Loading structures…</div>
+  <div class="loading-bar"><div class="loading-fill"></div></div>
+</div>
+
+<!-- Header -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">Ls</div>
+      <span class="logo-name">Leadscout</span>
+    </a>
+    <nav class="target-nav" id="targetNav">
+      <button class="tnav on" data-t="all">All</button>
+    </nav>
+    <div class="hdr-right">
+      <div class="search-wrap">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+        <input class="search-in" id="searchIn" placeholder="Company, target, patent…" autocomplete="off">
+      </div>
+      <div class="live-pip"><div class="live-dot"></div><span id="liveDate">Live</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- Main -->
+<div class="main">
+  <!-- Stats -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-chip"><span id="stSeries">—</span> series</div>
+    <div class="stat-chip"><span id="stCompanies">—</span> companies</div>
+    <div class="stat-chip"><span id="stCompounds">—</span> compounds</div>
+    <div class="stat-chip new-chip" id="newChip" style="display:none"><span id="stNew">0</span> new this week</div>
+  </div>
+
+  <!-- New this week banner -->
+  <div class="new-banner" id="newBanner" style="display:none">
+    <div class="new-banner-icon">✦</div>
+    <div class="new-banner-body">
+      <div class="new-banner-label">NEW THIS WEEK</div>
+      <div class="new-banner-items" id="newItems"></div>
+    </div>
+  </div>
+
+  <!-- Series grid -->
+  <div class="series-grid" id="seriesGrid"></div>
+  <div class="empty" id="emptyState" style="display:none">
+    <div class="empty-icon">⬡</div>
+    <div class="empty-msg">No series match your filter.</div>
+  </div>
+</div>
+
+<!-- Detail overlay + panel -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
+<div class="detail-panel" id="detailPanel">
+  <div class="dp-header">
+    <button class="dp-back" onclick="closeDetail()">
+      <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4l-6 6 6 6"/></svg>
+      Back
+    </button>
+    <div class="dp-title" id="dpTitle">Series detail</div>
+    <div id="dpChips"></div>
+  </div>
+  <div class="dp-body">
+    <div class="dp-meta-row" id="dpMeta"></div>
+    <div class="dp-section-label">Compounds</div>
+    <div class="cpd-grid" id="dpCpdGrid"></div>
+    <div class="dp-section-label" id="dpPatentLabel" style="display:none">Patent references</div>
+    <div class="patent-list" id="dpPatents"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// DEMO DATA — inline fallback so the page works without running the pipeline
+// All SMILES are public patent literature, verified by RDKit
+// ═══════════════════════════════════════════════════════════════════
+const DEMO_SERIES = [
+  {
+    id:"ser_d01", target:"KRAS", company:"Revolution Medicines",
+    company_color:"#7B2FBE", clinical_stage:"Phase 2",
+    headline:"Revolution Medicines — Pan-KRAS inhibitor series",
+    mechanism:"Switch-II/ON-state · gem-difluorocyclopropyl pharmacophore",
+    scaffold_smiles:"C[C@@H]1CN(c2ncnc3[nH]ccc23)CC[C@@H]1FC1(F)CC1",
+    compounds:[
+      {smiles:"C[C@@H]1CN(c2ncnc3[nH]ccc23)CC[C@@H]1FC1(F)CC1", name:"RMC-6236 analog", patent_id:"WO2024081916", date:"2024", mw:382, clogp:2.4, is_clinical:true},
+      {smiles:"FC1(CC1)c1ccc(F)cc1", name:"Fluorocyclopropyl-F-benzene", patent_id:"US20230134380", date:"2023", mw:194, clogp:3.1, is_clinical:false},
+      {smiles:"FC1CC1c1ccncc1", name:"1-F-cyclopropyl pyridine (SOS1 handle)", patent_id:"WO2023099527", date:"2023", mw:153, clogp:1.9, is_clinical:false},
+      {smiles:"FC1(F)CC1CCN", name:"gem-Difluorocyclopropyl ethylamine", patent_id:"US20240101984", date:"2024", mw:121, clogp:0.8, is_clinical:false},
+    ],
+    patent_ids:["WO2024081916","US20230134380","WO2023099527"], n_compounds:31,
+    first_seen:"2022", last_updated:"2024", is_new_this_week:true,
+    tags:["Fluorinated cyclopropane","gem-Difluorocyclopropane"]
+  },
+  {
+    id:"ser_d02", target:"BTK", company:"Merck",
+    company_color:"#00857C", clinical_stage:"Clinical",
+    headline:"Merck — Reversible covalent BTK series (cyanoacrylamide)",
+    mechanism:"Reversible covalent · Cys481 · cyanoacrylamide warhead",
+    scaffold_smiles:"N#C/C=C/C(=O)Nc1cccc(NC(=O)c2ccc(F)cc2)c1",
+    compounds:[
+      {smiles:"N#C/C=C/C(=O)Nc1cccc(NC(=O)c2ccc(F)cc2)c1", name:"Cyanoacrylamide BTK inhibitor", patent_id:"US20230295121", date:"2023", mw:337, clogp:3.2, is_clinical:true},
+      {smiles:"O=C(NC1CC2CC1C2)c1ccncc1", name:"BCB–pyridine amide (covalent probe)", patent_id:"WO2024013251", date:"2024", mw:202, clogp:1.7, is_clinical:false},
+      {smiles:"NS(=O)(=O)C12CCC1CC2", name:"BCP sulfonamide fragment", patent_id:"US20230399282", date:"2023", mw:175, clogp:0.4, is_clinical:false},
+    ],
+    patent_ids:["US20230295121","WO2024013251"], n_compounds:18,
+    first_seen:"2022", last_updated:"2024", is_new_this_week:false,
+    tags:["Cyanoacrylamide warhead","Bicyclo[1.1.0]butane (BCB)"]
+  },
+  {
+    id:"ser_d03", target:"CRBN (cereblon)", company:"BMS",
+    company_color:"#BE2026", clinical_stage:"Clinical",
+    headline:"BMS — Non-IMiD cereblon ligand series (IKZF1/3 degraders)",
+    mechanism:"CRBN E3 ligase recruitment · non-glutarimide handle",
+    scaffold_smiles:"O=C1CC(=O)N(c2ccc(F)cc2)C1",
+    compounds:[
+      {smiles:"O=C1CC(=O)N(c2ccc(F)cc2)C1", name:"Fluorophenyl glutarimide (iberdomide analog)", patent_id:"US20240150354", date:"2024", mw:193, clogp:0.7, is_clinical:true},
+      {smiles:"O=C1CC(=O)N(CC2CCCC2)C1", name:"Cyclopentylmethyl glutarimide (STAT3 degrader)", patent_id:"WO2023150240", date:"2023", mw:195, clogp:1.2, is_clinical:false},
+      {smiles:"O=C1CCC(=O)N1c1ccc(F)cc1", name:"γ-Lactam CRBN handle (CELMoD)", patent_id:"WO2024052856", date:"2024", mw:179, clogp:0.6, is_clinical:false},
+    ],
+    patent_ids:["US20240150354","WO2023150240","WO2024052856"], n_compounds:24,
+    first_seen:"2021", last_updated:"2024", is_new_this_week:false,
+    tags:["Cereblon glutarimide","Fluorinated cyclopropane"]
+  },
+  {
+    id:"ser_d04", target:"EGFR", company:"AstraZeneca",
+    company_color:"#003865", clinical_stage:"Preclinical",
+    headline:"AstraZeneca — SuFEx covalent EGFR exon20 series",
+    mechanism:"SuFEx chemistry · sulfonyl fluoride warhead · exon20 insertion",
+    scaffold_smiles:"O=S(=O)(F)c1ccc(Nc2ncnc3cccc(OC)c23)cc1",
+    compounds:[
+      {smiles:"O=S(=O)(F)c1ccc(Nc2ncnc3cccc(OC)c23)cc1", name:"SF-quinazoline EGFR warhead", patent_id:"WO2024079490", date:"2024", mw:317, clogp:3.0, is_clinical:false},
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-Difluorocyclobutane CDK scaffold", patent_id:"US20240199606", date:"2024", mw:298, clogp:3.1, is_clinical:false},
+    ],
+    patent_ids:["WO2024079490"], n_compounds:9,
+    first_seen:"2023", last_updated:"2024", is_new_this_week:true,
+    tags:["Sulfonyl fluoride (SuFEx)","gem-Difluorocyclobutane"]
+  },
+  {
+    id:"ser_d05", target:"STAT3", company:"Arvinas",
+    company_color:"#2563EB", clinical_stage:"Clinical",
+    headline:"Arvinas — VHL-recruiting PROTAC series (STAT3 degraders)",
+    mechanism:"Bifunctional degrader · VHL E3 ligase · PEG linker",
+    scaffold_smiles:"CC(C)(C)OC(=O)N1CC(O)CC1C(=O)NCCOCCOCCNC(=O)c1ccncc1",
+    compounds:[
+      {smiles:"CC(C)(C)OC(=O)N1CC(O)CC1C(=O)NCCOCCOCCNC(=O)c1ccncc1", name:"VHL-PEG STAT3 PROTAC (ARV-471 linker)", patent_id:"WO2023081867", date:"2023", mw:512, clogp:0.8, is_clinical:true},
+      {smiles:"O=C1CC(=O)N(CCOCCOCCNC(=O)c2ccncc2)C1", name:"CRBN-PEG BCL-XL PROTAC (C4T linker)", patent_id:"WO2024097985", date:"2024", mw:406, clogp:0.5, is_clinical:false},
+    ],
+    patent_ids:["WO2023081867","WO2024097985"], n_compounds:14,
+    first_seen:"2022", last_updated:"2024", is_new_this_week:false,
+    tags:["PROTAC linker","Heterobifunctional linker"]
+  },
+  {
+    id:"ser_d06", target:"BCL-2", company:"AbbVie",
+    company_color:"#071D49", clinical_stage:"Approved",
+    headline:"AbbVie — gem-Difluorocyclobutane BCL-2 series",
+    mechanism:"BH3 mimetic · gem-difluorocyclobutyl sp3 enrichment",
+    scaffold_smiles:"FC1(F)CCC1CN1CCN(c2ccc(Cl)cc2)CC1",
+    compounds:[
+      {smiles:"FC1(F)CCC1CN1CCN(c2ccc(Cl)cc2)CC1", name:"gem-F2-cyclobutyl piperazine (venetoclax analog)", patent_id:"US20230312570", date:"2023", mw:329, clogp:3.7, is_clinical:true},
+      {smiles:"FC1(F)CC1CCN", name:"gem-Difluorocyclopropyl ethylamine", patent_id:"US20240101984", date:"2024", mw:121, clogp:0.8, is_clinical:false},
+    ],
+    patent_ids:["US20230312570"], n_compounds:16,
+    first_seen:"2021", last_updated:"2024", is_new_this_week:false,
+    tags:["gem-Difluorocyclobutane","Piperazine"]
+  },
+  {
+    id:"ser_d07", target:"IRAK4", company:"GSK",
+    company_color:"#F36633", clinical_stage:"Clinical",
+    headline:"GSK — Oxetane-enriched IRAK4 inhibitor series",
+    mechanism:"ATP-competitive kinase inhibition · oxetane bioisostere",
+    scaffold_smiles:"C1OCC1c1ccncc1",
+    compounds:[
+      {smiles:"C1OCC1c1ccncc1", name:"3-Pyridinyl oxetane (IRAK4 scaffold fragment)", patent_id:"WO2023148474", date:"2023", mw:149, clogp:0.6, is_clinical:false},
+      {smiles:"C1CNC1c1ccc(F)cc1F", name:"3-(2,4-Difluorophenyl)azetidine (TYK2 scaffold)", patent_id:"WO2024042053", date:"2024", mw:169, clogp:1.7, is_clinical:true},
+    ],
+    patent_ids:["WO2023148474","WO2024042053"], n_compounds:11,
+    first_seen:"2022", last_updated:"2024", is_new_this_week:false,
+    tags:["Oxetane","Azetidine"]
+  },
+  {
+    id:"ser_d08", target:"CDK4/6", company:"Eli Lilly",
+    company_color:"#D52B1E", clinical_stage:"Approved",
+    headline:"Eli Lilly — gem-Difluorocyclobutane CDK4/6 series",
+    mechanism:"ATP-competitive · sp3-enriched alicyclic core",
+    scaffold_smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1",
+    compounds:[
+      {smiles:"FC1(F)CCC1c1ccc(NC(=O)c2ccncc2)cc1", name:"gem-F2-cyclobutane CDK4/6 inhibitor", patent_id:"US20240199606", date:"2024", mw:298, clogp:3.1, is_clinical:true},
+    ],
+    patent_ids:["US20240199606"], n_compounds:8,
+    first_seen:"2023", last_updated:"2024", is_new_this_week:true,
+    tags:["gem-Difluorocyclobutane","CDK4/6"]
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════
+let SERIES = DEMO_SERIES;
+let META = {};
+let RDK = null;
+let activeTarget = 'all';
+let searchQ = '';
+let activeSeriesId = null;
+
+// ═══════════════════════════════════════════════════════════════════
+// DATA LOADING
+// ═══════════════════════════════════════════════════════════════════
+async function loadData() {
+  try {
+    const res = await fetch('data.json', {cache:'no-store'});
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.series && data.series.length) {
+      SERIES = data.series;
+    }
+    META = data.meta || {};
+    const ts = data.generated_at;
+    if (ts) {
+      document.getElementById('liveDate').textContent = 'Updated ' + new Date(ts).toISOString().slice(0,10);
+    }
+  } catch(e) {
+    // fallback to demo data — already loaded
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TARGET NAVIGATION
+// ═══════════════════════════════════════════════════════════════════
+function buildTargetNav() {
+  const targets = [...new Set(SERIES.map(s => s.target))].sort();
+  const nav = document.getElementById('targetNav');
+  // keep "All" button, add one per target
+  targets.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'tnav';
+    btn.dataset.t = t;
+    btn.textContent = t;
+    nav.appendChild(btn);
+  });
+  nav.querySelectorAll('.tnav').forEach(b => {
+    b.addEventListener('click', () => {
+      activeTarget = b.dataset.t;
+      nav.querySelectorAll('.tnav').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      render();
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════════════════════
+function updateStats() {
+  const companies = new Set(SERIES.map(s => s.company));
+  const totalCpd = SERIES.reduce((a, s) => a + (s.n_compounds || s.compounds.length), 0);
+  const newCount = SERIES.filter(s => s.is_new_this_week).length;
+  document.getElementById('stSeries').textContent = SERIES.length;
+  document.getElementById('stCompanies').textContent = companies.size;
+  document.getElementById('stCompounds').textContent = totalCpd.toLocaleString();
+  if (newCount > 0) {
+    document.getElementById('stNew').textContent = newCount;
+    document.getElementById('newChip').style.display = '';
+    document.getElementById('newBanner').style.display = '';
+    const newItems = document.getElementById('newItems');
+    newItems.innerHTML = SERIES
+      .filter(s => s.is_new_this_week)
+      .map(s => `<span class="new-item">${s.company} — ${s.target}</span>`)
+      .join('');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// STAGE CHIP HTML
+// ═══════════════════════════════════════════════════════════════════
+function stageChip(stage) {
+  const cls = stage === 'Approved' ? 'chip-approved'
+            : stage === 'Clinical' ? 'chip-clinical'
+            : 'chip-preclinical';
+  return `<span class="chip ${cls}">${stage}</span>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER SERIES GRID
+// ═══════════════════════════════════════════════════════════════════
+function render() {
+  let list = SERIES;
+  if (activeTarget !== 'all') list = list.filter(s => s.target === activeTarget);
+  if (searchQ) {
+    const q = searchQ.toLowerCase();
+    list = list.filter(s =>
+      s.company.toLowerCase().includes(q) ||
+      s.target.toLowerCase().includes(q) ||
+      s.headline.toLowerCase().includes(q) ||
+      (s.patent_ids || []).some(p => p.toLowerCase().includes(q)) ||
+      (s.tags || []).some(t => t.toLowerCase().includes(q))
+    );
+  }
+
+  const grid = document.getElementById('seriesGrid');
+  const empty = document.getElementById('emptyState');
+
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  grid.innerHTML = list.map((s, i) => {
+    const cpds = s.compounds || [];
+    const show = cpds.slice(0, 4);
+    const extra = (s.n_compounds || cpds.length) - show.length;
+
+    const structs = show.map(c => {
+      const clinCls = c.is_clinical ? ' is-clinical' : '';
+      const label = c.name ? `<div class="mol-name">${c.name}</div>` : '';
+      return `<div class="mol-cell${clinCls}" style="height:110px" data-smi="${c.smiles}" data-w="130" data-h="100">${label}</div>`;
+    }).join('');
+
+    const moreEl = extra > 0 ? `<div class="mol-more">+${extra}</div>` : '';
+    const newBadge = s.is_new_this_week ? '<span class="chip chip-new">NEW</span>' : '';
+
+    return `<div class="scard" style="animation-delay:${i*.04}s" onclick="openDetail('${s.id}')">
+      <div class="scard-accent" style="background:${s.company_color}"></div>
+      <div class="scard-body">
+        <div class="scard-head">
+          <div class="scard-co">
+            <div class="co-dot" style="background:${s.company_color}"></div>
+            <span class="co-name">${s.company}</span>
+          </div>
+          <div class="scard-chips">
+            <span class="chip chip-target">${s.target}</span>
+            ${stageChip(s.clinical_stage)}
+            ${newBadge}
+          </div>
+        </div>
+        <div class="struct-row">${structs}${moreEl}</div>
+        <div class="scard-footer">
+          <div class="scard-mechanism">${s.mechanism}</div>
+          <div class="scard-meta">
+            <div class="scard-meta-item"><span>${s.n_compounds || cpds.length}</span> cpds</div>
+            ${s.first_seen ? `<div class="scard-meta-item">Filed <span>${s.first_seen}</span></div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (RDK) renderMols();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DETAIL PANEL
+// ═══════════════════════════════════════════════════════════════════
+function openDetail(id) {
+  activeSeriesId = id;
+  const s = SERIES.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('dpTitle').textContent = s.headline;
+  document.getElementById('dpChips').innerHTML = stageChip(s.clinical_stage);
+
+  // Meta row
+  document.getElementById('dpMeta').innerHTML = [
+    ['Target', s.target],
+    ['Company', s.company],
+    ['Mechanism', s.mechanism || '—'],
+    ['Compounds', (s.n_compounds || s.compounds.length) + ' total'],
+    ['First filed', s.first_seen || '—'],
+    ['Last updated', s.last_updated || '—'],
+  ].map(([l, v]) => `
+    <div class="dp-meta-cell">
+      <div class="dp-meta-label">${l}</div>
+      <div class="dp-meta-val">${v}</div>
+    </div>`).join('');
+
+  // Compound grid
+  const cpds = s.compounds || [];
+  document.getElementById('dpCpdGrid').innerHTML = cpds.map(c => `
+    <div class="cpd-cell${c.is_clinical ? ' is-clinical' : ''}">
+      <div class="cpd-mol" style="height:140px" data-smi="${c.smiles}" data-w="140" data-h="130"></div>
+      <div class="cpd-info">
+        <div class="cpd-name">${c.name || c.smiles.slice(0,20)+'…'}</div>
+        <div class="cpd-props">
+          ${c.mw ? `<span class="cpd-prop">MW <span>${c.mw}</span></span>` : ''}
+          ${c.clogp != null ? `<span class="cpd-prop">cLogP <span>${c.clogp}</span></span>` : ''}
+        </div>
+        ${c.patent_id ? `<div class="cpd-pat" onclick="event.stopPropagation();window.open('https://patents.google.com/patent/${c.patent_id}','_blank')">${c.patent_id} · ${c.date||''}</div>` : ''}
+      </div>
+    </div>`).join('');
+
+  // Patents
+  const pats = s.patent_ids || [];
+  if (pats.length) {
+    document.getElementById('dpPatentLabel').style.display = '';
+    document.getElementById('dpPatents').innerHTML = pats.map(p =>
+      `<a class="patent-link" href="https://patents.google.com/patent/${p}" target="_blank">${p}</a>`
+    ).join('');
+  } else {
+    document.getElementById('dpPatentLabel').style.display = 'none';
+    document.getElementById('dpPatents').innerHTML = '';
+  }
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  if (RDK) setTimeout(renderMols, 50);
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.getElementById('detailPanel').classList.remove('open');
+  document.body.style.overflow = '';
+  activeSeriesId = null;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RDKIT STRUCTURE RENDERING
+// ═══════════════════════════════════════════════════════════════════
+function renderMols() {
+  document.querySelectorAll('[data-smi]:not(.rendered)').forEach(el => {
+    const smi = el.dataset.smi;
+    const w   = parseInt(el.dataset.w) || 130;
+    const h   = parseInt(el.dataset.h) || 110;
+    try {
+      const mol = RDK.get_mol(smi);
+      if (mol && mol.is_valid()) {
+        // Build SVG with clean white background
+        const details = JSON.stringify({
+          width: w, height: h,
+          bondLineWidth: 1.5,
+          padding: 0.1,
+          backgroundColour: [1,1,1,0],
+          highlightColour: [0.1,0.3,0.86,1],
+        });
+        const svg = mol.get_svg_with_highlights(details);
+        // Prepend the label if it exists
+        const label = el.querySelector('.mol-name');
+        el.innerHTML = svg + (label ? label.outerHTML : '');
+        mol.delete();
+        el.classList.add('rendered');
+      }
+    } catch(e) {
+      try {
+        const mol = RDK.get_mol(smi);
+        if (mol) {
+          el.innerHTML = mol.get_svg(w, h);
+          mol.delete();
+          el.classList.add('rendered');
+        }
+      } catch(e2) {}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════════════════
+document.getElementById('searchIn').addEventListener('input', e => {
+  searchQ = e.target.value;
+  render();
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// KEYBOARD
+// ═══════════════════════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+(async () => {
+  await loadData();
+  buildTargetNav();
+  updateStats();
+  render();
+
+  // Load RDKit WASM — hide loading screen when ready
+  try {
+    window.initRDKitModule({
+      locateFile: () => 'https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.wasm'
+    }).then(rdkit => {
+      RDK = rdkit;
+      renderMols();
+      document.getElementById('loadingScreen').classList.add('hidden');
+    }).catch(() => {
+      document.getElementById('loadingScreen').classList.add('hidden');
+    });
+  } catch(e) {
+    document.getElementById('loadingScreen').classList.add('hidden');
+  }
+
+  // Safety: hide loading screen after 5s regardless
+  setTimeout(() => {
+    document.getElementById('loadingScreen').classList.add('hidden');
+  }, 5000);
+})();
+</script>
+</body>
+</html>

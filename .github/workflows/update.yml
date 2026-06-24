@@ -1,0 +1,56 @@
+name: MolTrend nightly update
+
+on:
+  schedule:
+    - cron: '0 6 * * *'    # 06:00 UTC daily
+  workflow_dispatch:        # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Cache ChEMBL / SureChEMBL fetches ──────────────────────────────────
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: .moltrend_cache
+          key: moltrend-cache-${{ runner.os }}-${{ hashFiles('moltrend/sources/*.py') }}
+          restore-keys: |
+            moltrend-cache-${{ runner.os }}-
+
+      # ── Python + dependencies ───────────────────────────────────────────────
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install rdkit anthropic --quiet
+
+      # ── Run pipeline ────────────────────────────────────────────────────────
+      - name: Generate data.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # optional
+          MCULE_API_KEY:     ${{ secrets.MCULE_API_KEY }}       # optional
+        run: |
+          python -m moltrend.build \
+            --source all \
+            --out data.json \
+            --min-support 5 \
+            --pubchem
+
+      # ── Commit & push ───────────────────────────────────────────────────────
+      - name: Commit data.json
+        run: |
+          git config user.name  "MolTrend Bot"
+          git config user.email "moltrend-bot@users.noreply.github.com"
+          git add data.json
+          git diff --staged --quiet || git commit -m "chore: update data.json [skip ci]"
+          git push
